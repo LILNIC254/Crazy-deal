@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deal Crazy · online shopping</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+        }
+
+        /* ========== HEADER ========== */
+        .top-bar {
+            background-color: #f68b1e; /* Jumia-like orange */
+            padding: 12px 5%;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            color: white;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1));
+        }
+
+        .logo-text {
+            font-weight: 800;
+            font-size: 1.8rem;
+            letter-spacing: -0.5px;
+            color: #ffffff;
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+        }
+
+        .logo-text span {
+            color: #212121;
+            font-weight: 900;
+        }
+
+        .search-area {
+            flex: 1 1 400px;
+            margin: 10px 20px;
+            display: flex;
+            background: white;
+            border-radius: 30px;
+            overflow: hidden;
+            max-width: 600px;
+        }
+
+        .search-area input {
+            flex: 1;
+            border: none;
+            padding: 12px 20px;
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        .search-area button {
+            background-color: #212121;
+            color: white;
+            border: none;
+            padding: 0 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .search-area button:hover {
+            background-color: #000;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            font-weight: 500;
+        }
+
+        .header-actions i {
+            margin-right: 6px;
+        }
+
+        .header-actions a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            font-size: 0.95rem;
+        }
+
+        /* ========== CATEGORY NAV ========== */
+        .category-nav {
+            background-color: #282828;
+            padding: 10px 5%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px 35px;
+            color: #ddd;
+            font-size: 0.9rem;
+            font-weight: 500;
+            align-items: center;
+            overflow-x: auto;
+        }
+
+        .category-nav a {
+            color: #f0f0f0;
+            text-decoration: none;
+            white-space: nowrap;
+            padding: 5px 0;
+            border-bottom: 2px solid transparent;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .category-nav a i {
+            color: #f68b1e;
+        }
+
+        .category-nav a:hover {
+            border-bottom-color: #f68b1e;
+            color: white;
+        }
+
+        /* ========== HERO / BANNER ========== */
+        .hero {
+            background: linear-gradient(135deg, #f68b1e 0%, #d35400 100%);
+            margin: 20px 5% 10px;
+            border-radius: 16px;
+            padding: 30px 40px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            color: white;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .hero-text h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            margin-top: 10px;
+            opacity: 0.95;
+            font-weight: 400;
+        }
+
+        .hero-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 12px 25px;
+            border-radius: 40px;
+            font-weight: 700;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,255,255,0.3);
+            font-size: 1.1rem;
+        }
+
+        /* ========== SECTION TITLE ========== */
+        .section-title {
+            margin: 30px 5% 15px;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #212121;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title i {
+            color: #f68b1e;
+        }
+
+        .section-title span {
+            border-left: 4px solid #f68b1e;
+            padding-left: 15px;
+        }
+
+        /* ========== CATEGORY CARDS (choose category) ========== */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 15px;
+            margin: 0 5% 30px;
+        }
+
+        .cat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px 10px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            transition: 0.2s;
+            cursor: pointer;
+            border: 1px solid #eee;
+        }
+
+        .cat-card i {
+            font-size: 2.2rem;
+            color: #f68b1e;
+            margin-bottom: 10px;
+        }
+
+        .cat-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #282828;
+        }
+
+        .cat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(246, 139, 30, 0.15);
+            border-color: #f68b1e;
+        }
+
+        /* ========== PRODUCT GRID ========== */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+            gap: 20px;
+            margin: 0 5% 40px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+            transition: 0.2s;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #eaeaea;
+        }
+
+        .product-card:hover {
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            transform: translateY(-3px);
+        }
+
+        .product-img {
+            background: #fafafa;
+            padding: 25px 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3.5rem;
+            color: #f68b1e;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .product-info {
+            padding: 15px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-info h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #1e1e1e;
+            margin-bottom: 5px;
+            line-height: 1.3;
+        }
+
+        .product-price {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #f68b1e;
+            margin: 8px 0 5px;
+        }
+
+        .product-price small {
+            font-size: 0.75rem;
+            color: #777;
+            font-weight: 400;
+            text-decoration: line-through;
+            margin-left: 6px;
+        }
+
+        .old-price {
+            font-size: 0.8rem;
+            color: #888;
+            text-decoration: line-through;
+            margin-left: 6px;
+            font-weight: 400;
+        }
+
+        .btn-buy {
+            background-color: #f68b1e;
+            color: white;
+            border: none;
+            padding: 10px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 12px;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .btn-buy:hover {
+            background-color: #d35400;
+        }
+
+        /* ========== ORDER CONFIRMATION NOTE ========== */
+        .confirm-note {
+            background-color: #fff7e6;
+            border-left: 6px solid #f68b1e;
+            padding: 20px 25px;
+            margin: 20px 5% 40px;
+            border-radius: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+
+        .confirm-note p {
+            font-size: 1.05rem;
+            color: #2c2c2c;
+            font-weight: 500;
+        }
+
+        .confirm-note i {
+            color: #f68b1e;
+            margin-right: 8px;
+        }
+
+        .phone-highlight {
+            background: #212121;
+            color: white;
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .phone-highlight i {
+            color: #f68b1e;
+            margin-right: 0;
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            background-color: #1e1e1e;
+            color: #bbb;
+            padding: 30px 5% 20px;
+            margin-top: 30px;
+            border-top: 3px solid #f68b1e;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .footer-col h4 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .footer-col a {
+            display: block;
+            color: #aaa;
+            text-decoration: none;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .footer-col a:hover {
+            color: #f68b1e;
+        }
+
+        .copyright {
+            text-align: center;
+            border-top: 1px solid #333;
+            padding-top: 20px;
+            margin-top: 25px;
+            font-size: 0.85rem;
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 700px) {
+            .top-bar {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+            }
+            .search-area {
+                margin: 5px 0;
+                max-width: 100%;
+            }
+            .header-actions {
+                justify-content: space-around;
+                margin-top: 5px;
+            }
+            .hero-text h1 {
+                font-size: 1.8rem;
+            }
+            .hero {
+                padding: 20px;
+            }
+            .section-title {
+                font-size: 1.3rem;
+            }
+            .confirm-note {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP BAR / HEADER -->
+    <header>
+        <div class="top-bar">
+            <div class="logo-area">
+                <i class="fas fa-bolt logo-icon"></i>
+                <div class="logo-text">Deal <span>Crazy</span></div>
+            </div>
+
+            <div class="search-area">
+                <input type="text" placeholder="Search for products, brands and categories...">
+                <button><i class="fas fa-search"></i> Search</button>
+            </div>
+
+            <div class="header-actions">
+                <a href="#"><i class="fas fa-user"></i> Account</a>
+                <a href="#"><i class="fas fa-shopping-cart"></i> Cart</a>
+            </div>
+        </div>
+
+        <!-- CATEGORY NAVIGATION (main categories) -->
+        <nav class="category-nav">
+            <a href="#"><i class="fas fa-star"></i> Deals</a>
+            <a href="#"><i class="fas fa-mobile-alt"></i> Phones</a>
+            <a href="#"><i class="fas fa-laptop"></i> Electronics</a>
+            <a href="#"><i class="fas fa-tshirt"></i> Fashion</a>
+            <a href="#"><i class="fas fa-home"></i> Home</a>
+            <a href="#"><i class="fas fa-spa"></i> Beauty</a>
+            <a href="#"><i class="fas fa-gamepad"></i> Gaming</a>
+            <a href="#"><i class="fas fa-tools"></i> Appliances</a>
+            <a href="#"><i class="fas fa-tag"></i> Clearance</a>
+        </nav>
+    </header>
+
+    <!-- HERO BANNER -->
+    <div class="hero">
+        <div class="hero-text">
+            <h1>Crazy prices, <br>every day.</h1>
+            <p>Chippings & everything else — affordable, fast, reliable.</p>
+        </div>
+        <div class="hero-badge">
+            <i class="fas fa-truck"></i> Free delivery on orders over KES 2,500
+        </div>
+    </div>
+
+    <!-- CATEGORY CHOOSE SECTION -->
+    <div class="section-title">
+        <i class="fas fa-th-large"></i> <span>Shop by category</span>
+    </div>
+    <div class="category-grid">
+        <div class="cat-card" onclick="alert('Phones category — coming soon!')">
+            <i class="fas fa-mobile-alt"></i>
+            <h4>Phones</h4>
+        </div>
+        <div class="cat-card" onclick="alert('Electronics category — coming soon!')">
+            <i class="fas fa-laptop"></i>
+            <h4>Electronics</h4>
+        </div>
+        <div class="cat-card" onclick="alert('Fashion category — coming soon!')">
+            <i class="fas fa-tshirt"></i>
+            <h4>Fashion</h4>
+        </div>
+        <div class="cat-card" onclick="alert('Home & Kitchen category — coming soon!')">
+            <i class="fas fa-couch"></i>
+            <h4>Home</h4>
+        </div>
+        <div class="cat-card" onclick="alert('Beauty category — coming soon!')">
+            <i class="fas fa-spa"></i>
+            <h4>Beauty</h4>
+        </div>
+        <div class="cat-card" onclick="alert('Gaming category — coming soon!')">
+            <i class="fas fa-gamepad"></i>
+            <h4>Gaming</h4>
+        </div>
+        <div class="cat-card" onclick="alert('Appliances category — coming soon!')">
+            <i class="fas fa-blender"></i>
+            <h4>Appliances</h4>
+        </div>
+        <div class="cat-card" onclick="alert('Chippings & more — best deals!')">
+            <i class="fas fa-tools"></i>
+            <h4>Chippings</h4>
+        </div>
+    </div>
+
+    <!-- PRODUCT GRID (best deals) -->
+    <div class="section-title">
+        <i class="fas fa-fire"></i> <span>Deal Crazy best sellers</span>
+    </div>
+    <div class="product-grid" id="productGrid">
+        <!-- Products will be injected with JavaScript -->
+    </div>
+
+    <!-- ORDER CONFIRMATION REMINDER (always visible) -->
+    <div class="confirm-note" id="orderConfirmBox">
+        <p><i class="fas fa-check-circle"></i> To confirm any order, please <strong>first</strong> send a message or call:</p>
+        <div class="phone-highlight">
+            <i class="fas fa-phone-alt"></i> 07 96 51 80 99
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>Deal Crazy</h4>
+                <a href="#">About us</a>
+                <a href="#">Contact</a>
+                <a href="#">Careers</a>
+                <a href="#">Blog</a>
+            </div>
+            <div class="footer-col">
+                <h4>Help</h4>
+                <a href="#">Shipping & delivery</a>
+                <a href="#">Returns</a>
+                <a href="#">How to order</a>
+                <a href="#">Payment options</a>
+            </div>
+            <div class="footer-col">
+                <h4>Follow us</h4>
+                <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+                <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+                <a href="#"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2025 Deal Crazy — Everything at crazy prices. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Product data (simulating a Jumia-like catalogue)
+        const products = [
+            { id: 1, name: 'Chippings (20kg bag) – Premium quality', price: 850, oldPrice: 1100, icon: 'fa-mountain' },
+            { id: 2, name: 'Smartphone 6.5" 128GB – Dual SIM', price: 15499, oldPrice: 18999, icon: 'fa-mobile-alt' },
+            { id: 3, name: 'Wireless Earbuds – Noise Cancelling', price: 2999, oldPrice: 3999, icon: 'fa-headphones' },
+            { id: 4, name: 'Men\'s Sneakers – Lightweight & breathable', price: 2350, oldPrice: 3500, icon: 'fa-shoe-prints' },
+            { id: 5, name: 'LED Smart TV 43" – Full HD', price: 21999, oldPrice: 26999, icon: 'fa-tv' },
+            { id: 6, name: 'Blender 2L – 500W, stainless steel', price: 3450, oldPrice: 4700, icon: 'fa-blender' },
+            { id: 7, name: 'Chippings (50kg bag) – bulk deal', price: 1900, oldPrice: 2500, icon: 'fa-mountain' },
+            { id: 8, name: 'Laptop 15.6" Core i5 – 8GB/256GB', price: 45999, oldPrice: 52999, icon: 'fa-laptop' }
+        ];
+
+        // Function to render product cards
+        function renderProducts() {
+            const grid = document.getElementById('productGrid');
+            if (!grid) return;
+
+            let html = '';
+            products.forEach(prod => {
+                // format prices with comma
+                const formattedPrice = prod.price.toLocaleString();
+                const formattedOld = prod.oldPrice ? prod.oldPrice.toLocaleString() : '';
+
+                html += `
+                    <div class="product-card">
+                        <div class="product-img">
+                            <i class="fas ${prod.icon}"></i>
+                        </div>
+                        <div class="product-info">
+                            <h3>${prod.name}</h3>
+                            <div class="product-price">
+                                KES ${formattedPrice}
+                                ${formattedOld ? `<span class="old-price">KES ${formattedOld}</span>` : ''}
+                            </div>
+                            <button class="btn-buy" onclick="confirmOrder('${prod.name.replace(/'/g, "\\'")}', ${prod.price})">
+                                <i class="fas fa-shopping-bag"></i> Buy now
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+            grid.innerHTML = html;
+        }
+
+        // Function that triggers when "Buy now" is clicked
+        function confirmOrder(productName, price) {
+            // Always show the phone number reminder with the order details
+            const phone = "0796518099"; // formatted as 07 96 51 80 99
+            const displayPhone = "07 96 51 80 99";
+            
+            // Create a friendly message
+            const message = `🛒 You are about to order: "${productName}" for KES ${price.toLocaleString()}.\n\nTo confirm your order, please contact us first on ${displayPhone}.`;
+            
+            // Use alert as a direct confirmation (also works as a reminder)
+            alert(message);
+            
+            // Additionally, we could scroll to the confirmation box, but alert is strong enough.
+            // For better UX we can also highlight the confirm box.
+            const confirmBox = document.querySelector('.confirm-note');
+            if (confirmBox) {
+                confirmBox.style.transition = '0.3s';
+                confirmBox.style.backgroundColor = '#ffe6c
